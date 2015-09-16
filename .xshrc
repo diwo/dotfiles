@@ -1,0 +1,35 @@
+[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
+
+# Disable flow control (C-s / C-q)
+stty -ixon
+
+# Aliases
+alias ls='ls --color=auto'
+alias ll='ls -la'
+alias dirs='dirs -v'
+alias grep='grep --color=auto'
+alias vim='vim -p'
+alias n='notify'
+alias fn='fg; notify'
+alias dockercompose=docker-compose
+alias dcompose=docker-compose
+alias fig=docker-compose
+alias tree='tree --dirsfirst'
+
+# Custom functions
+notify() {
+	local ret=$?
+
+	local id="Command"
+	if [ $# -ne 0 ]; then
+		id="$@"
+	fi
+
+	local msg="$id success!"
+	if [ $ret -ne 0 ]; then
+		msg="$id FAILED!"
+	fi
+
+	terminal-notifier -message "$msg"
+}
+
