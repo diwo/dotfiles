@@ -8,7 +8,6 @@ alias ls='ls --color=auto'
 alias ll='ls -la'
 alias dirs='dirs -v'
 alias grep='grep --color=auto'
-alias vim='vim -p'
 alias n='notify'
 alias fn='fg; notify'
 alias dockercompose=docker-compose

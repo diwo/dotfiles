@@ -9,6 +9,8 @@ set colorcolumn=120
 set timeoutlen=100
 set hlsearch | nohl
 set cursorline
+set splitbelow
+set splitright
 
 " Syntax highlight
 syntax on
