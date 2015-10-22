@@ -6,6 +6,7 @@ precmd() { print -Pn "\e]2; %~ \a" }
 # Contribs
 autoload colors && colors
 autoload -U select-word-style && select-word-style bash
+autoload -U edit-command-line && zle -N edit-command-line
 
 # Prompts
 for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
@@ -17,7 +18,8 @@ PS1="${CYAN}%n${RESET}@${MAGENTA}%m${RESET}:${YELLOW}%~${RESET}\$${RESET} "
 
 # Keybinds
 bindkey -v
-bindkey -rpM viins '^['
+bindkey -rpM viins "^["
+# viins
 bindkey -M viins "^P" up-line-or-history
 bindkey -M viins "^N" down-line-or-history
 bindkey -M viins "^R" history-incremental-search-backward
@@ -32,10 +34,11 @@ bindkey -M viins "^?" backward-delete-char
 bindkey -M viins "^W" backward-kill-word
 bindkey -M viins "^K" kill-line
 bindkey -M viins "^U" backward-kill-line
-bindkey -M viins "^Y" yank
-bindkey -M viins "^O" accept-and-infer-next-history
-bindkey -M vicmd "^O" accept-and-infer-next-history
 bindkey -M viins "^[." insert-last-word
+bindkey -M viins "^[v" edit-command-line
+# vicmd
+bindkey -M vicmd "^[v" edit-command-line
+
 export KEYTIMEOUT=1 # reduces <ESC> vi-mode delay
 
 # History

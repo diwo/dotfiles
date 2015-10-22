@@ -14,6 +14,7 @@ alias dockercompose=docker-compose
 alias dcompose=docker-compose
 alias fig=docker-compose
 alias tree='tree --dirsfirst'
+alias trim_grep_path="sed 's/^.\+\/\([a-zA-Z.]\+\)\([\:\-]\)/\1\2/'"
 
 # Custom functions
 notify() {
@@ -30,5 +31,13 @@ notify() {
 	fi
 
 	terminal-notifier -message "$msg"
+}
+
+highlight() {
+  sed 's/\r//' | grep --color=always -E "$1|$"
+}
+
+highlight_line() {
+  highlight ".*$1.*"
 }
 

@@ -11,12 +11,15 @@ set hlsearch | nohl
 set cursorline
 set splitbelow
 set splitright
+set listchars=tab:~\ ,trail:·
+"set listchars=tab:~\ ,trail:·,eol:↵
 
 " Syntax highlight
 syntax on
 set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
+highlight Search cterm=NONE ctermbg=237
 
 " Tab line
 set showtabline=2
@@ -53,6 +56,7 @@ endfunction
 
 " File types
 autocmd BufNewFile,BufRead *.html,*.handlebars set syntax=html sw=4 ts=4 noexpandtab
+autocmd BufNewFile,BufRead *.java set syntax=java sw=4 ts=4 noexpandtab
 
 " Java syntax
 let java_highlight_functions="style"
