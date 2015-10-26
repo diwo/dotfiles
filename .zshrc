@@ -10,11 +10,18 @@ autoload -U edit-command-line && zle -N edit-command-line
 
 # Prompts
 for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
-    eval $COLOR='%{$fg_no_bold[${(L)COLOR}]%}'  #wrap colours between %{ %} to avoid weird gaps in autocomplete
-    eval BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
+  eval $COLOR='%{$fg_no_bold[${(L)COLOR}]%}'  #wrap colours between %{ %} to avoid weird gaps in autocomplete
+  eval BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
 done
 eval RESET='%{$reset_color%}'
-PS1="${CYAN}%n${RESET}@${MAGENTA}%m${RESET}:${YELLOW}%~${RESET}\$${RESET} "
+ps1single() {
+  PS1="${CYAN}%n${RESET}@${MAGENTA}%m${RESET}:${YELLOW}%~${RESET}\$${RESET} "
+}
+ps1multi() {
+  ps1single
+  PS1=$(echo $PS1 | sed 's/\$/\n$/')
+}
+ps1single
 
 # Keybinds
 bindkey -v

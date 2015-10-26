@@ -1,18 +1,11 @@
 " Main
-set autoindent
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set nowrap
-set number
-set colorcolumn=120
-set timeoutlen=100
-set hlsearch | nohl
-set cursorline
-set splitbelow
-set splitright
+set tabstop=2 shiftwidth=2 autoindent expandtab
+set nowrap number cursorline colorcolumn=120
+set hlsearch
+set splitbelow splitright
 set listchars=tab:~\ ,trail:·
-"set listchars=tab:~\ ,trail:·,eol:↵
+set foldmethod=indent nofoldenable
+set timeoutlen=100
 
 " Syntax highlight
 syntax on

@@ -15,22 +15,23 @@ alias dcompose=docker-compose
 alias fig=docker-compose
 alias tree='tree --dirsfirst'
 alias trim_grep_path="sed 's/^.\+\/\([a-zA-Z.]\+\)\([\:\-]\)/\1\2/'"
+alias grepjx='grep -r --include=\*.{java,xml} --exclude-dir=target'
 
 # Custom functions
 notify() {
-	local ret=$?
+  local ret=$?
 
-	local id="Command"
-	if [ $# -ne 0 ]; then
-		id="$@"
-	fi
+  local id="Command"
+  if [ $# -ne 0 ]; then
+    id="$@"
+  fi
 
-	local msg="$id success!"
-	if [ $ret -ne 0 ]; then
-		msg="$id FAILED!"
-	fi
+  local msg="$id success!"
+  if [ $ret -ne 0 ]; then
+    msg="$id FAILED!"
+  fi
 
-	terminal-notifier -message "$msg"
+  terminal-notifier -message "$msg"
 }
 
 highlight() {
