@@ -35,7 +35,7 @@ notify() {
 }
 
 highlight() {
-  sed 's/\r//' | grep --color=always -E "$1|$"
+  sed 's/\r//' | grep --color=always -iE "$1|$"
 }
 
 highlight_line() {
