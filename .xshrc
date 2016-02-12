@@ -10,12 +10,11 @@ alias dirs='dirs -v'
 alias grep='grep --color=auto'
 alias n='notify'
 alias fn='fg; notify'
-alias dockercompose=docker-compose
-alias dcompose=docker-compose
 alias fig=docker-compose
 alias tree='tree --dirsfirst'
 alias trim_grep_path="sed 's/^.\+\/\([a-zA-Z.]\+\)\([\:\-]\)/\1\2/'"
 alias grepjx='grep -r --include=\*.{java,xml} --exclude-dir=target'
+alias copy='perl -wpe "chomp if eof" | pbcopy'
 
 # Custom functions
 notify() {

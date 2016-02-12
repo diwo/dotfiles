@@ -1,4 +1,5 @@
 " Vim Bundles: https://github.com/VundleVim/Vundle.vim
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall +qall
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -7,6 +8,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on
 
@@ -24,14 +26,19 @@ set wildignore=*~,*.swp,*/node_modules/*,*/bower_components/*,*/target/*
 
 " Indentation and file types
 set tabstop=2 shiftwidth=2 autoindent expandtab
-autocmd BufNewFile,BufRead *.handlebars set filetype=html
-autocmd FileType html,java,css,xml setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd BufNewFile,BufRead *.handlebars,*.hbs set filetype=html
+autocmd FileType html,css,xml,json,java,groovy setlocal tabstop=4 shiftwidth=4 noexpandtab
+
+" User commands
+com! FormatJSON execute '%!python3 -m json.tool' | retab!
 
 " Key mapping
 let mapleader = "\<Space>"
-nnoremap gy :tabp<CR>
 vnoremap <Leader>fy "fy:redir! > /tmp/yank \| echo @f \| redir end<CR>
 nnoremap <Leader>fp :r /tmp/yank<CR>
+
+" fugitive mappings
+nnoremap <Leader>gs :Gstatus<CR>
 
 " NERDTree mappings and options
 nnoremap <Leader>nt :NERDTreeToggle<CR>
@@ -40,6 +47,7 @@ nnoremap <Leader>nb :Bookmark<CR>
 let NERDTreeMapJumpNextSibling='<C-N>'
 let NERDTreeMapJumpPrevSibling='<C-P>'
 let NERDTreeMinimalUI=1
+let NERDTreeQuitOnOpen=0
 let NERDTreeIgnore=[
       \ '\~$[[file]]',
       \ '.swp$[[file]]',
