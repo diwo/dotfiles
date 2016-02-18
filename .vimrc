@@ -12,30 +12,27 @@ Plugin 'tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on
 
-" Display
+" General settings
 set nowrap number cursorline colorcolumn=120
 set hlsearch
 set splitbelow splitright
 set list listchars=tab:~\ ,trail:·
 set foldmethod=indent nofoldenable
-
-" Misc
 set backspace=indent,start,eol
 set timeoutlen=8000
 set wildignore=*~,*.swp,*/node_modules/*,*/bower_components/*,*/target/*
 
-" Indentation and file types
+" Indentation and formatting
 set tabstop=2 shiftwidth=2 autoindent expandtab
-autocmd BufNewFile,BufRead *.handlebars,*.hbs set filetype=html
 autocmd FileType html,css,xml,json,java,groovy setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd BufNewFile,BufRead *.handlebars,*.hbs set filetype=html
 
 " User commands
 com! FormatJSON execute '%!python3 -m json.tool' | retab!
+com! FormatXML let $XMLLINT_INDENT='    ' | execute '%!xmllint --format --recover -' | retab!
 
-" Key mapping
+" Key mappings
 let mapleader = "\<Space>"
-vnoremap <Leader>fy "fy:redir! > /tmp/yank \| echo @f \| redir end<CR>
-nnoremap <Leader>fp :r /tmp/yank<CR>
 
 " fugitive mappings
 nnoremap <Leader>gs :Gstatus<CR>
