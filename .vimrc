@@ -9,38 +9,47 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'chrisbra/csv.vim'
+Plugin 'jeetsukumaran/vim-indentwise'
+Plugin 'pangloss/vim-javascript'
 call vundle#end()
 filetype plugin indent on
 
 " General settings
-set nowrap number cursorline colorcolumn=120
-set hlsearch
+set nowrap number ruler cursorline colorcolumn=120
+set hlsearch nowrapscan
 set splitbelow splitright
 set list listchars=tab:~\ ,trail:·
-set foldmethod=indent nofoldenable
+set foldmethod=indent foldlevelstart=99 nofoldenable
 set backspace=indent,start,eol
 set timeoutlen=8000
 set wildignore=*~,*.swp,*/node_modules/*,*/bower_components/*,*/target/*
+set wildmenu wildmode=longest,list,full
 
-" Indentation and formatting
-set tabstop=2 shiftwidth=2 autoindent expandtab
-autocmd FileType html,css,xml,json,java,groovy setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd BufNewFile,BufRead *.handlebars,*.hbs set filetype=html
+" FileType specific settings
+set tabstop=2 shiftwidth=2 expandtab autoindent
+autocmd FileType html,css,xml,java,groovy setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType javascript setlocal foldmethod=syntax
+autocmd FileType csv autocmd CursorMoved <buffer> HiColumn
+autocmd BufNewFile,BufRead *.handlebars,*.hbs setlocal filetype=html
 
 " User commands
-com! FormatJSON execute '%!python3 -m json.tool' | retab!
-com! FormatXML let $XMLLINT_INDENT='    ' | execute '%!xmllint --format --recover -' | retab!
+com JSON execute '%!jq --indent 2 .' | retab! | setlocal syntax=json
+com XML execute '%!xmllint --format --recover -' | retab! | setlocal syntax=xml
 
 " Key mappings
 let mapleader = "\<Space>"
+map z\| zszH
+map [[ [{
+map ]] ]}
 
 " fugitive mappings
-nnoremap <Leader>gs :Gstatus<CR>
+nmap <Leader>gs :Gstatus<CR>
 
 " NERDTree mappings and options
-nnoremap <Leader>nt :NERDTreeToggle<CR>
-nnoremap <Leader>nf :NERDTreeFind<CR>
-nnoremap <Leader>nb :Bookmark<CR>
+nmap <Leader>nt :NERDTreeToggle<CR>
+nmap <Leader>nf :NERDTreeFind<CR>
+nmap <Leader>nb :Bookmark<CR>
 let NERDTreeMapJumpNextSibling='<C-N>'
 let NERDTreeMapJumpPrevSibling='<C-P>'
 let NERDTreeMinimalUI=1

@@ -15,6 +15,8 @@ alias tree='tree --dirsfirst'
 alias trim_grep_path="sed 's/^.\+\/\([a-zA-Z.]\+\)\([\:\-]\)/\1\2/'"
 alias grepjx='grep -r --include=\*.{java,xml} --exclude-dir=target'
 alias copy='perl -wpe "chomp if eof" | pbcopy'
+alias manifest="perl -pe 's/(\r\n|\r|\n)/___/g' | sed -e 's/___ //g' -e 's/___/\n/g'"
+alias colordiff="colordiff | diff-highlight"
 
 # Custom functions
 notify() {
