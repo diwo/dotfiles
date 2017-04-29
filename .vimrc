@@ -12,11 +12,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'chrisbra/csv.vim'
 Plugin 'jeetsukumaran/vim-indentwise'
 Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-surround'
 call vundle#end()
 filetype plugin indent on
 
 " General settings
-set nowrap number ruler cursorline colorcolumn=120
+set nowrap number ruler cursorline colorcolumn=120 scrolloff=2
 set hlsearch nowrapscan
 set splitbelow splitright
 set list listchars=tab:~\ ,trail:·
