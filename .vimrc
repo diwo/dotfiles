@@ -38,7 +38,8 @@ autocmd QuickFixCmdPost l* lwindow
 " FileType specific settings
 set tabstop=2 shiftwidth=2 expandtab autoindent
 autocmd FileType html,css,xml,java,groovy setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType javascript setlocal foldmethod=syntax
+autocmd FileType javascript,typescript setlocal tabstop=2 shiftwidth=2 expandtab foldmethod=syntax
+autocmd FileType c setlocal tabstop=8 shiftwidth=8 expandtab
 autocmd FileType markdown setlocal colorcolumn=80 textwidth=80
 autocmd FileType csv autocmd CursorMoved <buffer> HiColumn
 autocmd FileType clojure,lisp,scheme RainbowParentheses
@@ -58,6 +59,7 @@ let mapleader = "\<Space>"
 map z\| zszH
 map [[ [{
 map ]] ]}
+map gp `[v`]
 
 " terryma/vim-expand-region
 let g:expand_region_text_objects = {

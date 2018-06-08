@@ -15,8 +15,19 @@ alias tree='tree --dirsfirst'
 alias trim_grep_path="sed 's/^.\+\/\([a-zA-Z.]\+\)\([\:\-]\)/\1\2/'"
 alias grepjx='grep -r --include=\*.{java,xml} --exclude-dir=target'
 alias copy='perl -wpe "chomp if eof" | pbcopy'
-alias manifest="perl -pe 's/(\r\n|\r|\n)/___/g' | sed -e 's/___ //g' -e 's/___/\n/g'"
-alias colordiff="colordiff | diff-highlight"
+
+dockerRunCwd='docker run --rm -it -v "$(pwd)":/src'
+alias deb="$dockerRunCwd build-env"
+
+dockerRunForHaskell="$dockerRunCwd -v haskell_stack:/root/.stack"
+alias dockerRunForHaskell="$dockerRunForHaskell"
+alias haskell='dockerRunForHaskell haskell'
+alias stack='dockerRunForHaskell --entrypoint stack haskell'
+
+if command -v diff-highlight &>/dev/null; then
+  # diff-highlight is from git-contrib
+  alias colordiff='colordiff | diff-highlight'
+fi
 
 # Custom functions
 notify() {
@@ -41,5 +52,13 @@ highlight() {
 
 highlight_line() {
   highlight ".*$1.*"
+}
+
+manifest() {
+  perl -0777 -pe 's/\r//g; s/\n //g; s/((Import-Package)|(Export-Package)|(Provide-Capability)|(Require-Capability)|(Service-Component)): ([^\n]+)/\n\1:\n\7\n/g; s/("[,;])/\1\n/g; s/(\.xml),/\1\n/g; s/\n{3}/\n\n/g' "$@"
+}
+
+manifes_jar() {
+  unzip -c "$1" META-INF/MANIFEST.MF | manifest
 }
 
