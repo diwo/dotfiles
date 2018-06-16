@@ -16,7 +16,7 @@ alias trim_grep_path="sed 's/^.\+\/\([a-zA-Z.]\+\)\([\:\-]\)/\1\2/'"
 alias grepjx='grep -r --include=\*.{java,xml} --exclude-dir=target'
 alias copy='perl -wpe "chomp if eof" | pbcopy'
 
-dockerRunCwd='docker run --rm -it -v "$(pwd)":/src'
+dockerRunCwd='docker run --rm -it -v "$(pwd)":/workspace'
 alias deb="$dockerRunCwd build-env"
 
 dockerRunForHaskell="$dockerRunCwd -v haskell_stack:/root/.stack"
@@ -60,5 +60,15 @@ manifest() {
 
 manifes_jar() {
   unzip -c "$1" META-INF/MANIFEST.MF | manifest
+}
+
+# "bashLastContainer" for last container
+# "bashLastContainer 2" for second last, etc
+bashLastContainer() {
+  local N="${1:=1}"
+  local CONTAINER="$(docker ps -q | tail -n+$N | head -n1)"
+  if [ ! -z "$CONTAINER" ]; then
+    docker exec -it "$CONTAINER" /bin/bash
+  fi
 }
 
