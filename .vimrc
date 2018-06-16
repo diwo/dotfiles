@@ -43,6 +43,7 @@ autocmd FileType c setlocal tabstop=8 shiftwidth=8 expandtab
 autocmd FileType markdown setlocal colorcolumn=80 textwidth=80
 autocmd FileType csv autocmd CursorMoved <buffer> HiColumn
 autocmd FileType clojure,lisp,scheme RainbowParentheses
+autocmd FileType c,h setlocal tabstop=8 shiftwidth=8 cinoptions+=:0
 autocmd OptionSet syntax
   \ if &syntax=~'\v^(clojure|lisp|scheme)$' |
   \   RainbowParentheses |
@@ -77,7 +78,6 @@ let g:expand_region_text_objects = {
   \ 'a"' : 1,
   \ 'i''' : 1,
   \ 'a''' : 1,
-  \ 'ip' : 1
   \}
 
 " junegunn/rainbow_parentheses.vim
@@ -112,6 +112,10 @@ set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
 highlight Search cterm=NONE ctermbg=237
+
+" Javascript
+let g:javascript_plugin_jsdoc = 1
+
 
 " Java syntax
 let java_highlight_functions="style"
