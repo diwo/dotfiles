@@ -16,7 +16,7 @@ alias trim_grep_path="sed 's/^.\+\/\([a-zA-Z.]\+\)\([\:\-]\)/\1\2/'"
 alias grepjx='grep -r --include=\*.{java,xml} --exclude-dir=target'
 alias copy='perl -wpe "chomp if eof" | pbcopy'
 
-dockerRunCwd='docker run --rm -it -v "$(pwd)":/workspace'
+dockerRunCwd='docker run --rm -it -v "$(pwd)":/workspace -w /workspace'
 alias deb="$dockerRunCwd build-env"
 
 dockerRunForHaskell="$dockerRunCwd -v haskell_stack:/root/.stack"

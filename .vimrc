@@ -17,6 +17,7 @@ Plugin 'tpope/vim-fireplace'
 Plugin 'guns/vim-clojure-highlight'
 Plugin 'junegunn/rainbow_parentheses.vim'
 Plugin 'terryma/vim-expand-region'
+Plugin 'godlygeek/tabular'
 call vundle#end()
 filetype plugin indent on
 
@@ -105,6 +106,15 @@ let NERDTreeIgnore=[
 
 " bufexplorer config
 let g:bufExplorerShowRelativePath=1
+
+" Tabularize
+map <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+map <Leader>az= :Tabularize /.*\zs=<CR>
+map <Leader>a, :Tabularize /^[^,]*\zs,<CR>
+map <Leader>az, :Tabularize /.*\zs,<CR>
+map <Leader>a( :Tabularize /^[^(]*\zs(/l1r0<CR>
+map <Leader>a{ :Tabularize /^[^{,}]*\zs\({\\|,\\|}\)<CR>
+map <Leader>a\| :Tabularize /^[^\|]*\zs\|<CR>
 
 " Syntax highlight
 syntax on
