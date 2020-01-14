@@ -58,7 +58,7 @@ manifest() {
   perl -0777 -pe 's/\r//g; s/\n //g; s/((Import-Package)|(Export-Package)|(Provide-Capability)|(Require-Capability)|(Service-Component)): ([^\n]+)/\n\1:\n\7\n/g; s/("[,;])/\1\n/g; s/(\.xml),/\1\n/g; s/\n{3}/\n\n/g' "$@"
 }
 
-manifes_jar() {
+manifest_jar() {
   unzip -c "$1" META-INF/MANIFEST.MF | manifest
 }
 

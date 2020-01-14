@@ -38,23 +38,23 @@ autocmd QuickFixCmdPost l* lwindow
 
 " FileType specific settings
 set tabstop=2 shiftwidth=2 expandtab autoindent
-autocmd FileType html,css,xml,java,groovy setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType javascript,typescript setlocal tabstop=2 shiftwidth=2 expandtab foldmethod=syntax
-autocmd FileType c setlocal tabstop=8 shiftwidth=8 expandtab
+autocmd FileType xml,java,groovy setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType html,css,javascript,typescript setlocal tabstop=2 shiftwidth=2 expandtab foldmethod=syntax
+autocmd FileType c,h setlocal tabstop=8 shiftwidth=8 cinoptions+=:0
 autocmd FileType markdown setlocal colorcolumn=80 textwidth=80
 autocmd FileType csv autocmd CursorMoved <buffer> HiColumn
 autocmd FileType clojure,lisp,scheme RainbowParentheses
-autocmd FileType c,h setlocal tabstop=8 shiftwidth=8 cinoptions+=:0
 autocmd OptionSet syntax
   \ if &syntax=~'\v^(clojure|lisp|scheme)$' |
   \   RainbowParentheses |
   \ endif
 
-autocmd BufNewFile,BufRead *.handlebars,*.hbs setlocal filetype=html
+autocmd BufNewFile,BufRead *.vue,*.handlebars,*.hbs setlocal filetype=html
 
 " User commands
 com! JSON execute '%!jq --indent 2 .' | retab! | setlocal syntax=json
 com! XML execute '%!xmllint --format --recover -' | retab! | setlocal syntax=xml
+com! -nargs=* GenerateTags silent execute '!ctags --extra=+fq -R ' . <q-args> | redraw!
 
 " Key mappings
 let mapleader = "\<Space>"
