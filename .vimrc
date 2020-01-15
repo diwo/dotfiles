@@ -8,7 +8,6 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-fugitive'
 Plugin 'chrisbra/csv.vim'
 Plugin 'jeetsukumaran/vim-indentwise'
 Plugin 'pangloss/vim-javascript'
@@ -58,13 +57,19 @@ com! -nargs=* GenerateTags silent execute '!ctags --extra=+fq -R ' . <q-args> | 
 
 " Key mappings
 let mapleader = "\<Space>"
-map z\| zszH
-map [[ [{
-map ]] ]}
-map gp `[v`]
+nnoremap z\| zszH
+nnoremap [[ [{
+nnoremap ]] ]}
+nnoremap gp `[v`]
+nnoremap <Leader>co :copen<CR>
+nnoremap <Leader>cn :cnext<CR>
+nnoremap <Leader>cp :cprev<CR>
+nnoremap <Leader>mi :match Cursor /<C-R><C-W>/<CR>
+nnoremap <Leader>mn :match \| noh<CR>
 
 " terryma/vim-expand-region
 let g:expand_region_text_objects = {
+  \ 'ip' : 1,
   \ 'i(' : 1,
   \ 'a(' : 1,
   \ 'i[' : 1,
@@ -84,9 +89,6 @@ let g:expand_region_text_objects = {
 " junegunn/rainbow_parentheses.vim
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-
-" fugitive mappings
-nmap <Leader>gs :Gstatus<CR>
 
 " NERDTree mappings and options
 nmap <Leader>nt :NERDTreeToggle<CR>
@@ -167,3 +169,6 @@ function! TabLine()
   let s .= '%T%#TabLineFill#%='
   return s
 endfunction
+
+" Default statusline with window number in front
+set statusline=[%{winnr()}]\ %f\ %h%w%m%r%=%-14.(%l,%c%V%)\ %P
